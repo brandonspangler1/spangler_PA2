@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.lang.Math;
 
 /*
  * allow user to select type
@@ -23,36 +24,35 @@ public class BMICalculator {
 		    app.displayBmi();
 	}
 	
-	String weight, height;
+	private String weight, height, choice, BmiCategory;
+	private double Bmi;
 	Scanner kb = new Scanner(System.in);
 	
 	
 	public void readUserData() {
-		String choice = readUnitType();
-		readMeasurementData(choice);
+		readUnitType();
+		readMeasurementData();
 	}
 	
-	private String readUnitType() {
+	private void readUnitType() {
 		
-		String choice;
 		
 		while (true) {
 			System.out.println("Enter 1 for Imperial");
 			System.out.println("Enter 2 for Metric");
-			choice = kb.nextLine();
-			if (Integer.parseInt(choice) == 1 || Integer.parseInt(choice) == 2) {
+			this.choice = kb.nextLine();
+			if (Integer.parseInt(this.choice) == 1 || Integer.parseInt(this.choice) == 2) {
 				break;
 			}
 		}
 		
-		return choice;
 	}
 	
-	private void readMeasurementData(String choice) {
-		if (Integer.parseInt(choice) == 1) {
+	private void readMeasurementData() {
+		if (Integer.parseInt(this.choice) == 1) {
 			readImperialData();
 		}
-		else if (Integer.parseInt(choice) == 2) {
+		else if (Integer.parseInt(this.choice) == 2) {
 			readMetricData();
 		}
 	}
@@ -60,13 +60,13 @@ public class BMICalculator {
 	private void readMetricData() {
 		System.out.print("Enter your weight in kilograms: ");
 		this.weight = kb.nextLine();
-		if (Double.parseDouble(weight) <= 0) {
+		if (Double.parseDouble(this.weight) <= 0) {
 			System.exit(0);
 		}
 		
 		System.out.print("Enter your height in meters: ");
 		this.height = kb.nextLine();
-		if (Double.parseDouble(height) <= 0) {
+		if (Double.parseDouble(this.height) <= 0) {
 			System.exit(0);
 		}
 
@@ -75,25 +75,42 @@ public class BMICalculator {
 	private void readImperialData() {
 		System.out.print("Enter your weight in pounds: ");
 		this.weight = kb.nextLine();
-		if (Double.parseDouble(weight) <= 0) {
+		if (Double.parseDouble(this.weight) <= 0) {
 			System.exit(0);
 		}
 
 		
 		System.out.print("Enter your height in inches: ");
 		this.height = kb.nextLine();
-		if (Double.parseDouble(height) <= 0) {
+		if (Double.parseDouble(this.height) <= 0) {
 			System.exit(0);
 		}
 
 	}
 	
 	public void calculateBmi() {
+		if (Integer.parseInt(this.choice) == 1) {
+			Bmi = (703 - (Double.parseDouble(this.weight))) / (Math.pow((Double.parseDouble(this.height)), 2));
+		}
+		else if (Integer.parseInt(this.choice) == 2) {
+			Bmi = (Double.parseDouble(this.weight)) / (Math.pow((Double.parseDouble(this.height)), 2));
+		}
 		calculateBmiCategory();
 	}
 	
 	private void calculateBmiCategory() {
-		
+		if (Bmi < 18.5) {
+			BmiCategory = "Underweight";
+		}
+		else if (Bmi >= 18.5 && Bmi <= 24.9) {
+			BmiCategory = "Normalweight";
+		}
+		else if (Bmi >= 25 && Bmi <= 29.9) {
+			BmiCategory = "Overweight";
+		}
+		else if (Bmi >= 30) {
+			BmiCategory = "Obesity";
+		}
 	}
 	
 	public void displayBmi() {
