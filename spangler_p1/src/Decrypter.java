@@ -16,7 +16,11 @@ public class Decrypter {
 		
 		String numToDecrypt = getDecryptionNumFromUser(ENCRYPTIONLENGTH);
 		
+		int[] nums = convertToInt(numToDecrypt, ENCRYPTIONLENGTH);
 		
+		nums = swap(nums);
+		
+		nums = undoMod10(nums, ENCRYPTIONLENGTH);
 		
 		
 	}
@@ -52,6 +56,47 @@ public class Decrypter {
 		
 		return numToDecrypt;
 	}
+	
+	
+	public int[] convertToInt(String numToDecrypt, int ENCRYPTIONLENGTH) {
+		int nums[] = new int[ENCRYPTIONLENGTH];
+		
+		for (int i = 0; i < ENCRYPTIONLENGTH; i++) {
+			nums[i] = Integer.parseInt(String.valueOf(numToDecrypt.charAt(i)));
+		}
+		
+		return nums;
+	}
+	
+	public int[] swap(int[] nums) {
+		int temp; 
+		
+		temp = nums[0];
+		
+		nums[0] = nums[2];
+		
+		nums[2] = temp;
+		
+		temp = nums[1];
+		
+		nums[3] = nums[1];
+		
+		nums[1] = temp;
+		
+		return nums;
+	}
+	
+	public int[] undoMod10(int[] nums, int ENCRYPTIONLENGTH) {
+		
+		for(int i = 0; i < ENCRYPTIONLENGTH; i++) {
+			nums[i] = nums[i] + 10;
+			nums[i]
+		}
+		
+		return nums;
+	}
+	
+	
 	
 	
 	
