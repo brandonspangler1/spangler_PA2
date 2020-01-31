@@ -12,26 +12,15 @@ import java.util.Scanner;
 
 public class Decrypter {
 	
-	public void doDecryption(int ENCRYPTIONLENGTH) {
+	public void decrypt(int ENCRYPTIONLENGTH) {
 		
-		String numToDecrypt = getDecryptionNumFromUser(ENCRYPTIONLENGTH);
-		
-		int[] nums = convertToInt(numToDecrypt, ENCRYPTIONLENGTH);
-		
-		nums = swap(nums);
-		
-		nums = undoMod10(nums, ENCRYPTIONLENGTH);
-		
-		
-	}
-	
-	public String getDecryptionNumFromUser(int ENCRYPTIONLENGTH) {
 		Scanner num = new Scanner(System.in);
 		String numToDecrypt;
 		
+		//check if number is valid
 		while(true) {
 			
-			System.out.println("Enter your number: ");
+			System.out.print("Enter your number: ");
 			numToDecrypt = num.nextLine();
 			
 			if (numToDecrypt.length() > ENCRYPTIONLENGTH || numToDecrypt.length() < ENCRYPTIONLENGTH || numToDecrypt.charAt(0) == '-') {
@@ -53,51 +42,40 @@ public class Decrypter {
 			}
 			
 		}
+		System.out.print("\n");
 		
-		return numToDecrypt;
-	}
-	
-	
-	public int[] convertToInt(String numToDecrypt, int ENCRYPTIONLENGTH) {
+		//convert number to ints
 		int nums[] = new int[ENCRYPTIONLENGTH];
 		
 		for (int i = 0; i < ENCRYPTIONLENGTH; i++) {
 			nums[i] = Integer.parseInt(String.valueOf(numToDecrypt.charAt(i)));
 		}
 		
-		return nums;
-	}
-	
-	public int[] swap(int[] nums) {
-		int temp; 
+		//swap numbers
+		int temp;
 		
-		temp = nums[0];
-		
-		nums[0] = nums[2];
-		
-		nums[2] = temp;
-		
-		temp = nums[1];
-		
-		nums[3] = nums[1];
-		
-		nums[1] = temp;
-		
-		return nums;
-	}
-	
-	public int[] undoMod10(int[] nums, int ENCRYPTIONLENGTH) {
-		
-		for(int i = 0; i < ENCRYPTIONLENGTH; i++) {
-			nums[i] = nums[i] + 10;
-			nums[i]
+		for (int i = 0; i < ENCRYPTIONLENGTH/2; i++) {
+			temp = nums[i];
+			nums[i] = nums[i+2];
+			nums[i+2] = temp;
 		}
 		
-		return nums;
+		//unmod numbers and subtract 7
+		for (int i = 0; i < ENCRYPTIONLENGTH; i++) {
+			if((nums[i] - 7) < 0) {
+				nums[i] = nums[i] + 10;
+			}
+			
+			nums[i] = nums[i] - 7;
+		}
+		
+		
+		System.out.print("Your decrypted number is: ");
+		for(Integer x : nums) {
+			System.out.print(x);
+		}
+		System.out.print("\n\n");
+		
 	}
-	
-	
-	
-	
-	
+
 }

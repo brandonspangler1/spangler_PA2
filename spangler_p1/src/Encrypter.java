@@ -16,38 +16,15 @@ import java.util.Scanner;
 public class Encrypter {
 
 	
-	public void doEncryption(int ENCRYPTIONLENGTH) {
+	public void encrypt(int ENCRYPTIONLENGTH) {
 	
-		
-		String numToEncrypt = getEncryptionNumFromUser(ENCRYPTIONLENGTH);
-		
-		int nums[] = convertToInt(numToEncrypt, ENCRYPTIONLENGTH);
-		
-		nums = add7(nums, ENCRYPTIONLENGTH);
-		
-		nums = mod10(nums, ENCRYPTIONLENGTH);
-		
-		nums = swap(nums);
-		
-		System.out.println("Your encrypted number is: ");
-		for(Integer x : nums) {
-			System.out.print(x);
-		}
-		System.out.print("\n");
-	
-	}
-	
-	
-	
-	
-	public String getEncryptionNumFromUser(int ENCRYPTIONLENGTH) {
 		Scanner num = new Scanner(System.in);
 		String numToEncrypt;
 		
-		
+		//check if input valid
 		while(true) {
 			
-			System.out.println("Enter your number: ");
+			System.out.print("Enter your number: ");
 			numToEncrypt = num.nextLine();
 			
 			if (numToEncrypt.length() > ENCRYPTIONLENGTH || numToEncrypt.length() < ENCRYPTIONLENGTH || numToEncrypt.charAt(0) == '-') {
@@ -69,58 +46,42 @@ public class Encrypter {
 			}
 			
 		}
+		System.out.print("\n");
 		
-		return numToEncrypt;
-	}
-	
-	public int[] convertToInt(String numToEncrypt, int ENCRYPTIONLENGTH) {
+		//converts to ints
 		int nums[] = new int[ENCRYPTIONLENGTH];
 		
 		for(int i = 0; i < ENCRYPTIONLENGTH; i++) {
 			nums[i] = Integer.parseInt(String.valueOf(numToEncrypt.charAt(i)));
 		}
 		
-		return nums;
-	}
-	
-	
-	public int[] add7(int[] nums, int ENCRYPTIONLENGTH) {
-		
+		//add 7
 		for (int i = 0; i < ENCRYPTIONLENGTH; i++) {
 			nums[i] += 7;
 		}
 		
-		return nums;
-	}
-	
-	
-	public int[] mod10(int[] nums, int ENCRYPTIONLENGTH) {
-		
+		//mod 10
 		for (int i = 0; i < ENCRYPTIONLENGTH; i++) {
 			nums[i] = nums[i]%10;
 		}
 		
-		return nums;
 		
-	}
-	
-	public int[] swap(int[] nums) {
-		
+		//swap values
 		int temp;
 		
-		temp = nums[0];
+		for (int i = 0; i < ENCRYPTIONLENGTH/2; i++) {
+			temp = nums[i];
+			nums[i] = nums[i+2];
+			nums[i+2] = temp;
+		}
 		
-		nums[0] = nums[2];
 		
-		nums[2] = temp;
-		
-		temp = nums[1];
-		
-		nums[1] = nums[3];
-		
-		nums[3] = temp;
-		
-		return nums;
+		System.out.print("Your encrypted number is: ");
+		for(Integer x : nums) {
+			System.out.print(x);
+		}
+		System.out.print("\n\n");
+	
 	}
 	
 }

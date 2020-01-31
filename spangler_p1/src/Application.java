@@ -11,21 +11,12 @@ import java.util.Scanner;
 
 public class Application {
 	
-	private final int ENCRYPTIONLENGTH = 4;
+	private static final int ENCRYPTIONLENGTH = 4;
 	
 	public static void main(String[] args) {
 		
-		Application app1 = new Application();
-		
-		app1.menu();
-		
-	}
-	
-	
-	
-	
-	public void menu() {
-		Encrypter num = new Encrypter();
+		Encrypter Encrypter = new Encrypter();
+		Decrypter Decrypter = new Decrypter();
 		
 		Scanner kb = new Scanner(System.in);
 		String choice;
@@ -39,10 +30,10 @@ public class Application {
 			choice = kb.nextLine();
 			
 			if (Integer.parseInt(choice) == 1) {
-				num.doEncryption(ENCRYPTIONLENGTH);
+				Encrypter.encrypt(ENCRYPTIONLENGTH);
 			}
 			else if (Integer.parseInt(choice) == 2) {
-				
+				Decrypter.decrypt(ENCRYPTIONLENGTH);
 			}
 			else if (Integer.parseInt(choice) == 3) {
 				break;
@@ -50,6 +41,10 @@ public class Application {
 		}
 		
 		kb.close();
+		
 	}
 
 }
+	
+	
+	
