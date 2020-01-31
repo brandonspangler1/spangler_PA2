@@ -13,6 +13,16 @@ public class Application {
 	
 	public static void main(String[] args) {
 		
+		Application app1 = new Application();
+		
+		app1.menu();
+		
+	}
+	
+	
+	
+	
+	public void menu() {
 		Encrypter num = new Encrypter();
 		
 		Scanner kb = new Scanner(System.in);

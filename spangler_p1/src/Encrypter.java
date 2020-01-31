@@ -25,14 +25,13 @@ public class Encrypter {
 		
 		nums = mod10(nums);
 		
-	
+		nums = swap(nums);
 		
-		
-		
+		System.out.println("Your encrypted number is: ");
 		for(Integer x : nums) {
-			System.out.println(x);
+			System.out.print(x);
 		}
-		
+		System.out.print("\n");
 	
 	}
 	
@@ -91,6 +90,25 @@ public class Encrypter {
 		
 		return nums;
 		
+	}
+	
+	public int[] swap(int[] nums) {
+		
+		int temp;
+		
+		temp = nums[0];
+		
+		nums[0] = nums[2];
+		
+		nums[2] = temp;
+		
+		temp = nums[1];
+		
+		nums[1] = nums[3];
+		
+		nums[3] = temp;
+		
+		return nums;
 	}
 	
 }
