@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 
 /*
  * allow user to select type
@@ -23,63 +23,105 @@ public class BMICalculator {
 		    app.displayBmi();
 	}
 	
+	String weight, height;
+	Scanner kb = new Scanner(System.in);
 	
-	public readUserData() {
-		readUnitType
-		readMeasurmentData
+	
+	public void readUserData() {
+		String choice = readUnitType();
+		readMeasurementData(choice);
 	}
 	
-	private readUnitType() {
+	private String readUnitType() {
+		
+		String choice;
+		
+		while (true) {
+			System.out.println("Enter 1 for Imperial");
+			System.out.println("Enter 2 for Metric");
+			choice = kb.nextLine();
+			if (Integer.parseInt(choice) == 1 || Integer.parseInt(choice) == 2) {
+				break;
+			}
+		}
+		
+		return choice;
+	}
+	
+	private void readMeasurementData(String choice) {
+		if (Integer.parseInt(choice) == 1) {
+			readImperialData();
+		}
+		else if (Integer.parseInt(choice) == 2) {
+			readMetricData();
+		}
+	}
+	
+	private void readMetricData() {
+		System.out.print("Enter your weight in kilograms: ");
+		this.weight = kb.nextLine();
+		if (Double.parseDouble(weight) <= 0) {
+			System.exit(0);
+		}
+		
+		System.out.print("Enter your height in meters: ");
+		this.height = kb.nextLine();
+		if (Double.parseDouble(height) <= 0) {
+			System.exit(0);
+		}
+
+	}
+	
+	private void readImperialData() {
+		System.out.print("Enter your weight in pounds: ");
+		this.weight = kb.nextLine();
+		if (Double.parseDouble(weight) <= 0) {
+			System.exit(0);
+		}
+
+		
+		System.out.print("Enter your height in inches: ");
+		this.height = kb.nextLine();
+		if (Double.parseDouble(height) <= 0) {
+			System.exit(0);
+		}
+
+	}
+	
+	public void calculateBmi() {
+		calculateBmiCategory();
+	}
+	
+	private void calculateBmiCategory() {
 		
 	}
 	
-	private readMeasurementData() {
-		readMetricData
-		readImperialData
-	}
-	
-	private readMetricData() {
+	public void displayBmi() {
 		
 	}
 	
-	private readImperialData() {
+	public double getWeight() {
+		return weight;
+	}
+	
+	private void setWeight() {
 		
 	}
 	
-	public calculateBmi() {
-		calculateBmiCategory
+	public double getHeight() {
+		return height;
 	}
 	
-	private calculateBmiCategory() {
+	private void setHeight() {
 		
 	}
 	
-	public displayBmi() {
-		
+	public double getBmi() {
+		return Bmi;
 	}
 	
-	public getWeight() {
-		
-	}
-	
-	private setWeight() {
-		
-	}
-	
-	public getHeight() {
-		
-	}
-	
-	private setHeight() {
-		
-	}
-	
-	public getBmi() {
-		
-	}
-	
-	public getBmiCategory() {
-		
+	public String getBmiCategory() {
+		return BmiCategory;
 	}
 	
 	
