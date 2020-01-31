@@ -11,6 +11,8 @@ import java.util.Scanner;
 
 public class Application {
 	
+	private final int ENCRYPTIONLENGTH = 4;
+	
 	public static void main(String[] args) {
 		
 		Application app1 = new Application();
@@ -37,7 +39,7 @@ public class Application {
 			choice = kb.nextLine();
 			
 			if (Integer.parseInt(choice) == 1) {
-				num.doEncryption();
+				num.doEncryption(ENCRYPTIONLENGTH);
 			}
 			else if (Integer.parseInt(choice) == 2) {
 				
